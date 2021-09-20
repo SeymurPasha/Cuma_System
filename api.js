@@ -46,15 +46,23 @@ router.get('/visitors', (request, response) => {
 
 router.post('/addVisitor', (req, res) => {
 
- Visitor.create({id: req.body.id ,name:req.body.name}, (err, result) => {
-     if(err) {
-         console.log(err)
-     }
-     else {
-         console.log(result)
-         res.send(result)
-     }
- } )
+    try {
+        
+ Visitor.create({name:req.body.name}, (err, result) => {
+    if(err) {
+        console.log(err)
+    }
+    else {
+        console.log(result)
+        res.send(result)
+    }
+} )
+    }
+    catch(error) {
+        console.log(error)
+        return error;
+    }
+
 })
 router.delete('/delete', (req, res) => {
  Visitor.deleteOne({name:req.body.name}, (err,result) => {
